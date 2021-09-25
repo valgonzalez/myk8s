@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dnsexit
+  labels:
+    app: dnsexit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dnsexit
+  template:
+    metadata:
+      labels:
+        app: dnsexit
+    spec:
+      containers:
+      - name: trinity
+        image: valgonzalez/dnsexit
+        imagePullPolicy: Always
+        env:
+# cambia las variables con envsubst utilizando las variables locales:
+# ejecuta envsubst < trinity.yaml > trinity-apply.yaml
+                - name: LOGIN
+                  value: "$LOGIN"
+                - name: PASSWORD
+                  value: "$PASSWORD"
+                - name: HOST
+                  value: "$HOST"
+                - name: INTERVAL
+                  value: "$INTERVAL"
+                - name: TZ
+                  value: "$TZ"
