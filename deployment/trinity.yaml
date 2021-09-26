@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dnsexit
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: dnsexit
@@ -14,13 +14,12 @@ spec:
       labels:
         app: dnsexit
     spec:
+      nodeSelector:
+        rpi: version3
       containers:
       - name: trinity
         image: valgonzalez/dnsexit
-        imagePullPolicy: Always
         env:
-# cambia las variables con envsubst utilizando las variables locales:
-# ejecuta envsubst < trinity.yaml > trinity-apply.yaml
                 - name: LOGIN
                   value: "$LOGIN"
                 - name: PASSWORD
