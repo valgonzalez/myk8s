@@ -21,12 +21,27 @@ spec:
         image: valgonzalez/dnsexit
         env:
                 - name: LOGIN
-                  value: "$LOGIN"
+                  valueFrom:
+                    secretKeyRef:
+                      name: trinity
+                      key: login
                 - name: PASSWORD
-                  value: "$PASSWORD"
+                  valueFrom:
+                    secretKeyRef:
+                      name: trinity
+                      key: password
                 - name: HOST
-                  value: "$HOST"
+                  valueFrom:
+                    secretKeyRef:
+                      name: trinity
+                      key: host
                 - name: INTERVAL
-                  value: "$INTERVAL"
+                  valueFrom:
+                    secretKeyRef:
+                      name: trinity
+                      key: interval
                 - name: TZ
-                  value: "$TZ"
+                  valueFrom:
+                    secretKeyRef:
+                      name: trinity
+                      key: tz
