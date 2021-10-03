@@ -45,3 +45,17 @@ spec:
                     secretKeyRef:
                       name: trinity
                       key: tz
+        volumeMounts:
+        - name: tz-panama
+          mountPath: /etc/timezone
+          readOnly: true
+        - name: lt-panama
+          mountPath: /etc/localtime
+          readOnly: true
+      volumes:
+        - name: tz-panama
+          hostPath:
+            path: /usr/share/zoneinfo/America/Panama
+        - name: lt-panama
+          hostPath:
+            path: /etc/localtime
