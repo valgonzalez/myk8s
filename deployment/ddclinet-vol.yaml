@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-ddclient
+  labels:
+    app: dindns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dindns
+  template:
+    metadata:
+      labels:
+        app: dindns
+    spec:
+      nodeSelector:
+        rpi: version3
+      containers:
+        - name: ddclient
+          image: linuxserver/ddclient
+          volumeMounts:
+          - name: ddclient-vol
+            mountPath: /config
+      volumes:
+        - name: ddclient-vol
+          configMap:
+            name: ddclient-config
+            items:
+            - key: ddclient
+              path: ddclient.conf
